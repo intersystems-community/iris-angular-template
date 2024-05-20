@@ -1,0 +1,273 @@
+{
+    "components":{
+      "responses":{
+        "403":{
+          "description":"Forbidden: Authentication Failure"
+        }
+      },
+      "schemas":{
+        "JSONError":{
+          "description":"An error message / multiple error messages",
+          "example":{
+            "errors":[
+            ]
+          },
+          "properties":{
+            "errors":{
+              "description":"An array containing information about each of the errors that occurred",
+              "items":{
+                "properties":{
+                  "code":{
+                    "description":"The error code",
+                    "type":"integer"
+                  },
+                  "domain":{
+                    "type":"string"
+                  },
+                  "error":{
+                    "description":"A string-format representation of the error",
+                    "type":"string"
+                  },
+                  "errors":{
+                    "items":{
+                      "$ref":"#/components/schemas/JSONError"
+                    },
+                    "type":"array"
+                  },
+                  "id":{
+                    "type":"string"
+                  },
+                  "params":{
+                    "items":{
+                      "type":"string"
+                    },
+                    "type":"array"
+                  }
+                }
+              },
+              "type":"array"
+            },
+            "summary":{
+              "description":"A description of the error(s) that occurred",
+              "type":"string"
+            }
+          },
+          "type":"object"
+        },
+        "platform-user_output":{
+          "properties":{
+            "Username":{
+              "example":"etamarch",
+              "type":"string"
+            },
+            "_id":{
+              "type":"string"
+            }
+          },
+          "readOnly":true,
+          "required":[
+            "_id"
+          ],
+          "type":"object"
+        }
+      }
+    },
+    "info":{
+      "description":"***This is an initial development build!*** (see [https://semver.org/](https://semver.org/))\n\n\n---\n\n# Warnings\n- No security schemes are defined, consider supplying one by setting specification.Security in ItFinallyWorks.rest.Handler:ModifyOpenAPISpecification\n- The CheckPermission method is not overwritten in ItFinallyWorks.rest.Handler; access to all documentation-related endpoints will be denied\n",
+      "title":"-it-finally-works-api",
+      "version":"0.1.0+debug"
+    },
+    "openapi":"3.0.3",
+    "paths":{
+      "/auth/logout":{
+        "post":{
+          "description":"Log out the current user",
+          "responses":{
+            "200":{
+              "description":"A successful response"
+            }
+          }
+        }
+      },
+      "/auth/status":{
+        "get":{
+          "description":"Get information about the current user",
+          "responses":{
+            "200":{
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "$ref":"#/components/schemas/platform-user_output"
+                  }
+                }
+              },
+              "description":"A representation of the current user"
+            },
+            "204":{
+              "description":"No Content: No information was found on the current user"
+            }
+          }
+        }
+      },
+      "/build-documentation":{
+        "get":{
+          "description":"Get information on the current REST API documentation build",
+          "responses":{
+            "200":{
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "description":"Information on the status of a build",
+                    "properties":{
+                      "buildFinishedTime":{
+                        "description":"When the build finished (Unix time), 0 = not-yet-determined",
+                        "type":"integer"
+                      },
+                      "buildInProgress":{
+                        "description":"Whether or not the build is currently in-progress",
+                        "type":"boolean"
+                      },
+                      "buildParameters":{
+                        "properties":{
+                          "debug":{
+                            "description":"The build's debug parameter",
+                            "type":"integer"
+                          },
+                          "internal":{
+                            "description":"The build's internal parameter",
+                            "type":"integer"
+                          },
+                          "userContext":{
+                            "properties":{
+                              "_id":{
+                                "description":"The ID of the UserContext() that triggered this build (or the empty string if no such context exists)",
+                                "type":"string"
+                              }
+                            },
+                            "type":"object"
+                          }
+                        },
+                        "type":"object"
+                      },
+                      "buildProgress":{
+                        "properties":{
+                          "OpenAPI":{
+                            "description":"The current stage of the OpenAPI build process",
+                            "type":"string"
+                          },
+                          "buildStage":{
+                            "description":"The current stage of the over-all build process (monotonically increasing for a given build)",
+                            "type":"integer"
+                          }
+                        },
+                        "type":"object"
+                      },
+                      "buildStartedTime":{
+                        "description":"When the build was started (Unix time)",
+                        "type":"integer"
+                      }
+                    },
+                    "type":"object"
+                  }
+                }
+              },
+              "description":"The status of either the build that is currently in-progress, or the last build if no build is currently in-progress"
+            },
+            "403":{
+              "$ref":"#/components/responses/403"
+            }
+          }
+        },
+        "post":{
+          "description":"Trigger a (re)build of REST API documentation",
+          "parameters":[
+            {
+              "description":"The debug level to build documentation with (defaults to 0 if not specified)",
+              "in":"query",
+              "name":"debug",
+              "schema":{
+                "type":"integer"
+              }
+            },
+            {
+              "description":"Whether or not documentation should be built for readers with source code access (defaults to 0=false if not specified)",
+              "in":"query",
+              "name":"internal",
+              "schema":{
+                "type":"integer"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "example":{
+                      "statusUrl":"/build-documentation",
+                      "statusMethod":"GET",
+                      "buildStarted":true
+                    },
+                    "properties":{
+                      "buildStarted":{
+                        "description":"Whether or not the requested build was started successfully",
+                        "type":"boolean"
+                      },
+                      "statusMethod":{
+                        "description":"HTTP Method to use in conjunction with statusUrl",
+                        "type":"string"
+                      },
+                      "statusUrl":{
+                        "description":"URL to view the status of the started build",
+                        "type":"string"
+                      }
+                    },
+                    "type":"object"
+                  }
+                }
+              },
+              "description":"Information about the started build"
+            },
+            "403":{
+              "$ref":"#/components/responses/403"
+            },
+            "423":{
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "example":{
+                      "statusUrl":"/build-documentation",
+                      "statusMethod":"GET",
+                      "buildStarted":true
+                    },
+                    "properties":{
+                      "buildStarted":{
+                        "description":"Whether or not the requested build was started successfully",
+                        "type":"boolean"
+                      },
+                      "statusMethod":{
+                        "description":"HTTP Method to use in conjunction with statusUrl",
+                        "type":"string"
+                      },
+                      "statusUrl":{
+                        "description":"URL to view the status of the started build",
+                        "type":"string"
+                      }
+                    },
+                    "type":"object"
+                  }
+                }
+              },
+              "description":"Locked: Another build is currently in-progress, try again later"
+            }
+          }
+        }
+      }
+    },
+    "servers":[
+      {
+        "description":"/api",
+        "url":"/api"
+      }
+    ]
+  }

@@ -5,8 +5,5 @@ services:
       context: .
     command: --check-caps false
     ports: 
-      - 52773
-    volumes:
-      - ./web:/opt/coffee/csp
-      - ./tests:/opt/coffee/tests
-      - ./:/irisdev/app
+      - 8080:52773
+      - 8000:4200

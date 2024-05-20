@@ -1,18 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="demo-coffeemaker.ZPM">
+  <Document name="app-name.ZPM">
     <Module>
-      <Name>demo-coffeemaker</Name>
-      <Version>1.0.2</Version>
-      <Description>InterSystems IRIS Full-stack app demo</Description>
-      <Keywords>REST,Full-stack,angular</Keywords>
+      <Name>app-name</Name>
+      <Version>0.1.0</Version>
+      <Description>Full Stack Application Template</Description>
       <Packaging>module</Packaging>
-      <CSPApplication CookiePath="/csp/coffee/" DefaultTimeout="900" DeployPath="${cspdir}/coffee" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/web" UnauthenticatedEnabled="0" Url="/csp/coffee" UseSessionCookie="2"/>
-      <SourcesRoot>src</SourcesRoot>
-      <Resource Directory="cls" Name="Demo.PKG"/>
-      <Resource Name="Demo.coffeemakerD.GBL"/>
-      <CSPApplication CookiePath="/rest/coffeemakerapp/" DefaultTimeout="900" DispatchClass="Demo.CoffeeMakerRESTServer" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/rest/coffeemakerapp" UseSessionCookie="2"/>
-      <UnitTest Name="/tests" Package="UnitTest" Phase="test"/>
+      <SourcesRoot>.</SourcesRoot>
+      <Dependencies>
+        <ModuleReference>
+          <Name>isc.ipm.js</Name>
+          <Version>^1.1.2</Version>
+        </ModuleReference>
+        <ModuleReference>
+          <Name>isc.rest</Name>
+          <Version>^1.2.1</Version>
+        </ModuleReference>
+                <ModuleReference>
+          <Name>git-source-control</Name>
+          <Version>^2.3.0</Version>
+        </ModuleReference>
+      </Dependencies>
+      <Resources>
+
+
+        <!-- Application codebase -->
+        <Resource Name="AppName.PKG">
+          <Attribute Name="Directory">cls</Attribute>
+        </Resource>
+        <Resource Name="AppName.Installer.CLS" Preload="true">
+          <Attribute Name="Directory">cls</Attribute>
+        </Resource>
+        <Resource Name="/ng/app" ProcessorClass="pkg.isc.ipm.js.angular.processor">
+          <Attribute Name="baseHref">/${namespace}</Attribute>
+        </Resource>
+        <Resource Name="/ng/app/dist/app" ProcessorClass="CSPApplication" Generated="true">
+          <Attribute Name="DispatchClass">pkg.isc.ipm.js.angular.pathLocationHandler</Attribute>
+          <Attribute Name="Directory">${cspdir}${namespace}/app-name</Attribute>
+          <Attribute Name="Url">/${namespace}</Attribute>
+          <Attribute Name="ServeFiles">1</Attribute>
+          <Attribute Name="Recurse">1</Attribute>
+          <Attribute Name="ServeFilesTimeout">0</Attribute>
+        </Resource>
+        <Resource Name="/app-name/api" ProcessorClass="CSPApplication" Generated="true">
+          <Attribute Name="DispatchClass">AppName.rest.Handler</Attribute>
+          <Attribute Name="Url">/${namespace}/api</Attribute>
+          <Attribute Name="Recurse">1</Attribute>
+          <Attribute Name="PasswordAuthEnabled">1</Attribute>
+          <Attribute Name="UnauthenticatedEnabled">0</Attribute>
+        </Resource>
+        <Resource Name="/api/openapi.json" ProcessorClass="pkg.isc.ipm.js.openApiProcessor">
+          <Attribute Name="DispatchClass">AppName.rest.Handler</Attribute>
+          <Attribute Name="Url">/${namespace}/api</Attribute>
+          <Attribute Name="BaseUrl">/api</Attribute>
+          <Attribute Name="TargetFolder">/ng/app/src/app/generated</Attribute>
+          <Attribute Name="Generator">typescript-angular</Attribute>
+          <Attribute Name="AdditionalProperties">paramNaming=original,queryParamObjectFormat=key,useSingleRequestParameter=true,ngVersion=13.3.4</Attribute>
+        </Resource>
+      </Resources>
+
+      <Invoke Class="AppName.Installer" Method="NPMConfigSet" Phase="Reload" />
+      <Invoke Class="AppName.Installer" Method="FixSourceMappings" Phase="Reload" />
+      <Invoke Class="AppName.Installer" Method="SetCSSToUTF8" />
+            <Invoke Class="AppName.Installer" Method="AddCodeDBReadForStaticFiles">
+        <Arg>/${namespace}</Arg>
+        <Arg>#{..Name}</Arg>
+      </Invoke>
+      <Invoke Class="AppName.Installer" Method="ApplySecurityChanges">
+        <Arg>/${namespace}</Arg>
+      </Invoke>
+      <Invoke Class="AppName.Installer" Method="RemoveSecurityChanges" Phase="Unconfigure" />
+      <LifecycleClass>pkg.isc.ipm.js.openApiModule</LifecycleClass>
+      <Defaults>
+        <ProcessorDefault Class="Default.Include">
+          <Attribute Name="Format">UDL</Attribute>
+        </ProcessorDefault>
+        <ProcessorDefault Class="Default.Class">
+          <Attribute Name="FilenameExtension">cls</Attribute>
+          <Attribute Name="Format">UDL</Attribute>
+        </ProcessorDefault>
+        <ProcessorDefault Class="Default.Package">
+          <Attribute Name="FilenameExtension">cls</Attribute>
+          <Attribute Name="Format">UDL</Attribute>
+        </ProcessorDefault>
+        <ProcessorDefault Class="UnitTest">
+          <Attribute Name="Format">UDL</Attribute>
+        </ProcessorDefault>
+      </Defaults>
     </Module>
   </Document>
 </Export>

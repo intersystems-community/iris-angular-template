@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build Docker image
-      run: docker build -t coffeemaker:${GITHUB_SHA} .
+      run: docker build -t appscaffold:${GITHUB_SHA} .
     - name: Tests
       run: |
           docker run --rm -i \

@@ -16,7 +16,7 @@ docker-compose up -d
 
 ## open terminal to docker
 ```
-docker-compose exec iris iris session iris -U COFFEE
+docker-compose exec iris iris session iris -U APP-NAME
 ```
 ## debug CSP
 ```
