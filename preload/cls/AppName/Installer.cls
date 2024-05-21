@@ -304,25 +304,5 @@ ClassMethod AddCodeDBReadForStaticFiles(webApplication As %String, roleName As %
     $$$ThrowOnError(##class(Security.Applications).Modify(webApplication,.props))
 }
 
-ClassMethod FixSourceMappings()
-{
-	kill ^Sources("ZPM")
-}
-
-ClassMethod NPMConfigSet(wasJobbed As %Boolean = 0)
-{
-	If 'wasJobbed {
-		// Needs to be set up for the OS-level context of background jobs
-		// (because the Angular build runs in a background job)
-		Write !,"Setting @intersystems:registry to https://arti.iscinternal.com/artifactory/api/npm/npm-local/"
-		Job ..NPMConfigSet(1)
-	} Else {
-		Set args($i(args)) = "config"
-		Set args($i(args)) = "set"
-		Set args($i(args)) = "@intersystems:registry=https://arti.iscinternal.com/artifactory/api/npm/npm-local/"
-		Do $zf(-100,"/SHELL","npm",.args)
-	}
-}
-
 }
 
