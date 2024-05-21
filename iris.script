@@ -3,14 +3,14 @@
     Do ##class(Security.Users).UnExpireUserPasswords("*")
 
     // create APP-NAME namespace
-    do $SYSTEM.OBJ.Load("/home/irisowner/zpm/preload/cls/AppName/Installer.cls","ck")
+    do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AppName/Installer.cls","ck")
     d ##class(AppName.Installer).SetupBASE() 
     
 
     // load all the code of the project as a ZPM package
     zn "APP-NAME"
-    set ^Sources = "/home/irisowner/zpm/"
+    set ^Sources = "/irisdev/app/"
 
-    do $SYSTEM.OBJ.Load("/home/irisowner/zpm/preload/cls/AppName/Installer.cls","ck")
+    do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AppName/Installer.cls","ck")
     d ##class(AppName.Installer).SetupBASE() 
     halt

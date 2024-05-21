@@ -8,13 +8,16 @@ ARG IMAGE=intersystemsdc/iris-community
 FROM $IMAGE
 
 
-WORKDIR /home/irisowner/zpm
+WORKDIR /irisdev/app
 
 USER root
-COPY --chown=irisowner:irisowner . /home/irisowner/zpm
-#RUN mkdir /home/irisowner/zpm/ng/app/node_modules
-RUN chmod +w -R /home/irisowner/zpm/ng/app
+
+RUN mkdir /irisdev/app/ng/app/node_modules -p
+RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /irisdev/app -R
+VOLUME /irisdev/app
+
 RUN apt update && apt-get -y install git
+RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /irisdev/app -R
 
 # Install Node
 RUN apt-get -y install curl
@@ -25,7 +28,6 @@ RUN node -v
 
 USER ${ISC_PACKAGE_MGRUSER}
 
-# RUN mkdir /home/irisowner/zpm/ng/app/node_modules
 
 ARG TESTS=0
 ARG MODULE="app-name"
