@@ -1,0 +1,22 @@
+<mat-toolbar>
+    <div *ngIf="loggedIn" fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div class="navigation-items">
+        <ul>
+            <li><a routerLink="/home">{{title}}</a></li>
+            <li *ngIf="loggedIn" style="float:right" class="user">
+                
+                <a href="javascript:void(0)" class="dropbtn">
+                    <mat-icon>account_circle</mat-icon>
+                    <span class="nav-caption">{{userName}}</span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#" (click)="logout()">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+  </mat-toolbar>

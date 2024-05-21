@@ -1,0 +1,17 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav role="navigation">
+        <app-side-nav (sidenavClose)="sidenav.close()"></app-side-nav>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <app-header 
+            (sidenavToggle)="sidenav.toggle()"
+            [loggedIn]="loggedIn"
+            [userName]="userName"
+            [title]="title" 
+            ></app-header>
+        <main>
+          <router-outlet></router-outlet>
+        </main>
+      </mat-sidenav-content>
+</mat-sidenav-container>
+

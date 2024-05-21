@@ -1,0 +1,26 @@
+.login {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invalid-feedback {
+  color: darkred;
+  font-weight: bold;
+  font-size: smaller;
+}
+
+mat-form-field {
+  margin: 0px;
+}
+
+mat-form-field input {
+  width: 100%;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

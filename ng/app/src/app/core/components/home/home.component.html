@@ -1,0 +1,69 @@
+<mat-card class="scaffold-instructions">
+    <mat-card-header>
+        <mat-card-title>IRIS-Angular Application Scaffold</mat-card-title>
+        <mat-card-subtitle>Scaffold used to build new angular applications that interface with IRIS</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Overview">
+              <h1>Overview</h1>
+              <p>The scaffold is a basic angular application that interfaces with IRIS.
+                It includes a script for automated setup so that developers have a ready environment to code in.</p>
+              <p>The AppScaffold uses the <a href="https://github.com/intersystems/ipm">InterSystems Package Manager</a> to easily install applications onto new machines.</p>
+              <p>The rest of the tabs on this page contain some useful guide on navigating features of the scaffold app</p>
+              <h2>Basic Use</h2>
+              <p>The Angular application can be hosted locally using <code>ng serve</code>, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command <code>zpm "app-name activate"</code> in your IRIS terminal.</p>
+              <p>The "proxy.conf.js" file is used to point to the IRIS instance you are using. If working with a remote iris instance, you can change the proxy to point to that instance.</p>
+              <p>For information on how to set up VSCode for IRIS, refrer to the documentation: <a href="https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=GVSCO">Documentation</a></p>
+              <h2>Source Control</h2>
+              <p>The Scaffold uses <a href="https://github.com/intersystems/git-source-control/tree/main">git-source-control</a> to manage server-side source control using Git. For more information visit the github repository.</p>
+            </mat-tab>
+            <mat-tab label="REST Services">
+              <h1>REST Services</h1>
+              <p>The AppScaffold uses the isc.rest package from zpm for REST services, which is installed during setup.</p>
+              <h2>Creating a REST Service</h2>
+              <p>First, we want to have a class extend %pkg.isc.rest.model, either the adaptor or the resource. This class must also have a parameter called RESOURCENAME</p>
+              <code>Class Example.Class Extends (%Persistent, %pkg.isc.rest.model.adaptor)
+                <br>Parameter RESOURCENAME = "example";  
+              </code>
+              <p>After writing a method or query that we want to call from angular, we must define an ActionMap, to expose the REST endpoint. The actionmap can have many action endpoints.</p>
+              <p>If we wanted to call a <code>DoSomething</code> class in our code from an endpoint, it will be as follows:</p>
+              <code>
+                XData ActionMap [XMLNamespace = “http://www.instersystems.com/_pkg/isc/rest/action" ] {{'{'}}
+                    <br>&ensp;&lt;actions&gt;
+                    <br>&emsp;&lt;action name="do-something" method="GET" call="DoSomething" target="class"&gt;
+                    <br>&emsp;&lt;argument name="objectName" target="objectName" source="body" required="true" /&gt;
+                    <br>&emsp;&lt;/action&gt;
+                    <br>&ensp;&lt;/actions&gt;
+                    <br>{{"}"}}
+              </code>
+              <p>Finally, we want to create a ClassMethod called "CheckPermission", which decides whether a REST operation is allowed.</p>
+                <code>
+                    ClassMethod CheckPermission(pID As %String, pOperation As %String, pUserContext As %RegisteredObject, ByRef URLParams) As %Boolean {{"{"}}
+                    <br>&ensp;Quit $IsObject(pUserContext) && ((pOperation = $$$OperationAction("do-something"))
+                    <br>{{"}"}}
+                </code>
+                <p> We can add each future action that we want to allow to the CheckPermission method. This gives us a basic setup for REST calls using IRIS.</p>
+              <h2>OpenAPI generator</h2>
+                <p>OpenAPI generator is a tool that generates REST API documentation from a REST API specification. The scaffold uses the openapi-generator-cli to generate the documentation, and turn it into angular services.</p>
+                <p>OpenAPI generation requires the installation of Java version 11 on your system.</p>
+                <p>To use the generator with the Scaffold, simply run the command <code>zpm "app-name generate"</code> in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.</p>
+            </mat-tab>
+            <mat-tab label="Authentication">
+            <h1>Authentication</h1>
+            <p>The scaffold comes with IRIS authentication, meaning that your credentials for the IRIS instance would be used to log into the angular application. If this is the desired funnctionality,
+                nothing needs to be changed. If you however want to use a different authentication method, you can enable delegated authentication for the web application.</p>
+            <h2>Delegated Authentication</h2>
+            <p>To activate delegated authentication, change the authentication of the app-name/api web application in the management portal to delegated. After that, you should create a <a href="https://docs.intersystems.com/iris20232/csp/docbook/Doc.View.cls?KEY=TSQS_DelAuthExPartOne">ZAUTHENTICATE.MAC</a> routine in a 'rtn' subfolder of the project, inside of which you will put your custom authentication code. Finally, you should update the module.xml file by adding the ZAUTHENTICATE routine as a resource, and then run <code>zpm "app-name activate</code>" in your IRIS terminal.</p>
+            </mat-tab>
+            <mat-tab label="Useful Resources">
+                <h1>Useful Resources</h1>
+                <p>Below are some resources that could be useful for your development.</p>
+                <ul>
+                    <li><a href="https://docs.intersystems.com/">IRIS Documentation</a></li>
+                    <li><a href="https://community.intersystems.com/">InterSystems Community</a></li>
+                </ul>
+            </mat-tab>
+          </mat-tab-group>
+    </mat-card-content>
+</mat-card>
