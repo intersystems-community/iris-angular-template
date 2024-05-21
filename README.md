@@ -6,6 +6,8 @@ It demonstrates the way to communicate with InterSystes IRIS from an angular app
 It demoes the way to develop using Docker containers.
 It demoes how to package the application in ZPM module and how to deploy it using ZPM.
 
+For more information on how to use and customize the angular template, see the [dev.md](https://github.com/isc-etchenko/iris-angular-template/blob/master/dev.md) file.
+
 ## Installation
 ### Docker way
 Clone the repo, run:
@@ -36,7 +38,7 @@ This repository is ready to code in VSCode with ObjectScript plugin.
 Install [VSCode](https://code.visualstudio.com/), [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) and [ObjectScript](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript) plugin and open the folder in VSCode.
 
 ## ZPM Package Manager
-This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/intersystems-community/iris-angular-template/blob/40d39a688df604ef11681c80fc24254a6570fe43/module.xml).
+This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/isc-etchenko/iris-angular-template/blob/master/module.xml).
 
 Feel free to use as an example and change the module.xml to package your own InterSystems IRIS full-stack solution using angular.
 
