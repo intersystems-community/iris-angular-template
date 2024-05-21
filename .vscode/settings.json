@@ -8,7 +8,7 @@
       "internalPort": 52773
     },
     "links": {
-      "CoffeeMaker": "http://localhost:${port}/app-name/"
+      "angular-template": "http://localhost:8080/app-name/"
     },
     "active": false
   }
