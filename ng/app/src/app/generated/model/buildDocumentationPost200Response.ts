@@ -1,6 +1,6 @@
 /**
- * -app-name-api
- * ***This is an initial development build!*** (see [https://semver.org/](https://semver.org/))   ---  # Warnings - No security schemes are defined, consider supplying one by setting specification.Security in AppName.rest.Handler:ModifyOpenAPISpecification - The CheckPermission method is not overwritten in AppName.rest.Handler; access to all documentation-related endpoints will be denied 
+ * -angular-template-api
+ * ***This is an initial development build!*** (see [https://semver.org/](https://semver.org/))   ---  # Warnings - No security schemes are defined, consider supplying one by setting specification.Security in AngularTemplate.rest.Handler:ModifyOpenAPISpecification - The CheckPermission method is not overwritten in AngularTemplate.rest.Handler; access to all documentation-related endpoints will be denied 
  *
  * The version of the OpenAPI document: 0.1.0+debug
  * 

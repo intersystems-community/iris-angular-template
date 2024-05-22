@@ -38,8 +38,8 @@ USER ${ISC_PACKAGE_MGRUSER}
 
 
 ARG TESTS=0
-ARG MODULE="app-name"
-ARG NAMESPACE="APP-NAME"
+ARG MODULE="angular-template"
+ARG NAMESPACE="angular-template"
 
 RUN --mount=type=bind,src=.,dst=. \
     iris start IRIS && \

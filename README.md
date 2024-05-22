@@ -18,18 +18,18 @@ docker-compose up -d
 To build the angular application in the container, run
 
 ```
-docker-compose exec iris iris session iris -U APP-NAME
+docker-compose exec iris iris session iris -U angular-template
 ```
 
 to open and iris terminal, and then
 
 ```
-zpm "app-name activate -verbose"
+zpm "angular-template activate -verbose"
 ```
 
 to activate the zpm module and build the application.
 
-Run the application with URL: http://localhost:8080/app-name/
+Run the application with URL: http://localhost:8080/angular-template/
 
 ## Development
 ### Prerequisites

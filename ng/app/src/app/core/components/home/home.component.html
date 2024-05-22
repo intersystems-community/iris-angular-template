@@ -12,7 +12,7 @@
               <p>The AppScaffold uses the <a href="https://github.com/intersystems/ipm">InterSystems Package Manager</a> to easily install applications onto new machines.</p>
               <p>The rest of the tabs on this page contain some useful guide on navigating features of the scaffold app</p>
               <h2>Basic Use</h2>
-              <p>The Angular application can be hosted locally using <code>ng serve</code>, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command <code>zpm "app-name activate"</code> in your IRIS terminal.</p>
+              <p>The Angular application can be hosted locally using <code>ng serve</code>, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command <code>zpm "angular-template activate"</code> in your IRIS terminal.</p>
               <p>The "proxy.conf.js" file is used to point to the IRIS instance you are using. If working with a remote iris instance, you can change the proxy to point to that instance.</p>
               <p>For information on how to set up VSCode for IRIS, refrer to the documentation: <a href="https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=GVSCO">Documentation</a></p>
               <h2>Source Control</h2>
@@ -47,14 +47,14 @@
               <h2>OpenAPI generator</h2>
                 <p>OpenAPI generator is a tool that generates REST API documentation from a REST API specification. The scaffold uses the openapi-generator-cli to generate the documentation, and turn it into angular services.</p>
                 <p>OpenAPI generation requires the installation of Java version 11 on your system.</p>
-                <p>To use the generator with the Scaffold, simply run the command <code>zpm "app-name generate"</code> in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.</p>
+                <p>To use the generator with the Scaffold, simply run the command <code>zpm "angular-template generate"</code> in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.</p>
             </mat-tab>
             <mat-tab label="Authentication">
             <h1>Authentication</h1>
             <p>The scaffold comes with IRIS authentication, meaning that your credentials for the IRIS instance would be used to log into the angular application. If this is the desired funnctionality,
                 nothing needs to be changed. If you however want to use a different authentication method, you can enable delegated authentication for the web application.</p>
             <h2>Delegated Authentication</h2>
-            <p>To activate delegated authentication, change the authentication of the app-name/api web application in the management portal to delegated. After that, you should create a <a href="https://docs.intersystems.com/iris20232/csp/docbook/Doc.View.cls?KEY=TSQS_DelAuthExPartOne">ZAUTHENTICATE.MAC</a> routine in a 'rtn' subfolder of the project, inside of which you will put your custom authentication code. Finally, you should update the module.xml file by adding the ZAUTHENTICATE routine as a resource, and then run <code>zpm "app-name activate</code>" in your IRIS terminal.</p>
+            <p>To activate delegated authentication, change the authentication of the angular-template/api web application in the management portal to delegated. After that, you should create a <a href="https://docs.intersystems.com/iris20232/csp/docbook/Doc.View.cls?KEY=TSQS_DelAuthExPartOne">ZAUTHENTICATE.MAC</a> routine in a 'rtn' subfolder of the project, inside of which you will put your custom authentication code. Finally, you should update the module.xml file by adding the ZAUTHENTICATE routine as a resource, and then run <code>zpm "angular-template activate</code>" in your IRIS terminal.</p>
             </mat-tab>
             <mat-tab label="Useful Resources">
                 <h1>Useful Resources</h1>

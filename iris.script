@@ -2,15 +2,15 @@
     zn "%SYS"
     Do ##class(Security.Users).UnExpireUserPasswords("*")
 
-    // create APP-NAME namespace
-    do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AppName/Installer.cls","ck")
-    d ##class(AppName.Installer).SetupBASE() 
+    // create angular-template namespace
+    do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AngularTemplate/Installer.cls","ck")
+    d ##class(AngularTemplate.Installer).SetupBASE() 
     
 
     // load all the code of the project as a ZPM package
-    zn "APP-NAME"
+    zn "angular-template"
     set ^Sources = "/irisdev/app/"
 
-    do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AppName/Installer.cls","ck")
-    d ##class(AppName.Installer).SetupBASE() 
+    do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AngularTemplate/Installer.cls","ck")
+    d ##class(AngularTemplate.Installer).SetupBASE() 
     halt

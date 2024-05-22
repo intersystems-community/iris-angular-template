@@ -1,16 +1,16 @@
 Include %sySecurity
 
-Class AppName.Installer
+Class AngularTemplate.Installer
 {
 
-Parameter RoleName = "AppName";
+Parameter RoleName = "AngularTemplate";
 
 /// Manifest Definition.
 XData MyManifest [ XMLNamespace = INSTALLER ]
 {
 <Manifest>
 
-<Var Name="Namespace" Value="app-name"/>
+<Var Name="Namespace" Value="angular-template"/>
 <If Condition='##class(%File).DirectoryExists("/database")'>
 <Var Name="CodeDBDir" Value="/database/${Namespace}-CODE/"/>
 <Var Name="DataDBDir" Value="/database/${Namespace}-DATA/"/>
@@ -56,18 +56,18 @@ XData MyManifest [ XMLNamespace = INSTALLER ]
 <Namespace Name="${SourceNamespace}" Create="no">
 
 <!-- Install ZPM -->
-<Invoke Class="AppName.Installer" Method="InstallZPM" />
+<Invoke Class="AngularTemplate.Installer" Method="InstallZPM" />
 </Namespace>
 
 <Namespace Name="${Namespace}" Create="no">
 <!-- ZPM load -->
-<Invoke Class="AppName.Installer" Method="ZPMLoad" />
+<Invoke Class="AngularTemplate.Installer" Method="ZPMLoad" />
 </Namespace>
 
 <Namespace Name="${SourceNamespace}" Create="no">
 
 <!-- Configure Source Control -->
-<!--<Invoke Class="AppName.Installer" Method="RunSourceControlSetup" />-->
+<!--<Invoke Class="AngularTemplate.Installer" Method="RunSourceControlSetup" />-->
 </Namespace>
 </Manifest>
 }

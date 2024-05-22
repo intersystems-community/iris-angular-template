@@ -73,8 +73,8 @@
     }
   },
   "info":{
-    "description":"***This is an initial development build!*** (see [https://semver.org/](https://semver.org/))\n\n\n---\n\n# Warnings\n- No security schemes are defined, consider supplying one by setting specification.Security in AppName.rest.Handler:ModifyOpenAPISpecification\n- The CheckPermission method is not overwritten in AppName.rest.Handler; access to all documentation-related endpoints will be denied\n",
-    "title":"-app-name-api",
+    "description":"***This is an initial development build!*** (see [https://semver.org/](https://semver.org/))\n\n\n---\n\n# Warnings\n- No security schemes are defined, consider supplying one by setting specification.Security in AngularTemplate.rest.Handler:ModifyOpenAPISpecification\n- The CheckPermission method is not overwritten in AngularTemplate.rest.Handler; access to all documentation-related endpoints will be denied\n",
+    "title":"-angular-template-api",
     "version":"0.1.0+debug"
   },
   "openapi":"3.0.3",

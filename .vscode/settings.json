@@ -2,13 +2,13 @@
   "objectscript.conn": {
     "username": "_SYSTEM",
     "password": "SYS",
-    "ns": "APP-NAME",
+    "ns": "angular-template",
     "docker-compose": {
       "service": "iris",
       "internalPort": 52773
     },
     "links": {
-      "angular-template": "http://localhost:8080/app-name/"
+      "angular-template": "http://localhost:8080/angular-template/"
     },
     "active": false
   }

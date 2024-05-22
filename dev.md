@@ -10,7 +10,7 @@ The rest of the tabs on this page contain some useful guide on navigating featur
 Basic Use
 ---------
 
-The Angular application can be hosted locally using `ng serve`, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command `zpm "app-name activate"` in your IRIS terminal.
+The Angular application can be hosted locally using `ng serve`, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command `zpm "angular-template activate"` in your IRIS terminal.
 
 The "proxy.conf.js" file is used to point to the IRIS instance you are using. If working with a remote iris instance, you can change the proxy to point to that instance.
 
@@ -68,7 +68,7 @@ OpenAPI generator is a tool that generates REST API documentation from a REST AP
 
 OpenAPI generation requires the installation of Java version 11 on your system.
 
-To use the generator with the Scaffold, simply run the command `zpm "app-name generate"` in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.
+To use the generator with the Scaffold, simply run the command `zpm "angular-template generate"` in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.
 
 Authentication
 ==============
@@ -78,7 +78,7 @@ The scaffold comes with IRIS authentication, meaning that your credentials for t
 Delegated Authentication
 ------------------------
 
-To activate delegated authentication, change the authentication of the app-name/api web application in the management portal to delegated. After that, you should create a [ZAUTHENTICATE.MAC](https://docs.intersystems.com/iris20232/csp/docbook/Doc.View.cls?KEY=TSQS_DelAuthExPartOne) routine in a 'rtn' subfolder of the project, inside of which you will put your custom authentication code. Finally, you should update the module.xml file by adding the ZAUTHENTICATE routine as a resource, and then run `zpm "app-name activate`" in your IRIS terminal.
+To activate delegated authentication, change the authentication of the angular-template/api web application in the management portal to delegated. After that, you should create a [ZAUTHENTICATE.MAC](https://docs.intersystems.com/iris20232/csp/docbook/Doc.View.cls?KEY=TSQS_DelAuthExPartOne) routine in a 'rtn' subfolder of the project, inside of which you will put your custom authentication code. Finally, you should update the module.xml file by adding the ZAUTHENTICATE routine as a resource, and then run `zpm "angular-template activate`" in your IRIS terminal.
 
 Useful Resources
 ================
@@ -107,7 +107,7 @@ docker-compose up -d
 
 ## open terminal to docker
 ```
-docker-compose exec iris iris session iris -U APP-NAME
+docker-compose exec iris iris session iris -U angular-template
 ```
 ## debug CSP
 ```

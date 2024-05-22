@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="app-name.ZPM">
+  <Document name="angular-template.ZPM">
     <Module>
-      <Name>app-name</Name>
+      <Name>angular-template</Name>
       <Version>0.1.0</Version>
       <Description>Full Stack Application Template</Description>
       <Packaging>module</Packaging>
@@ -25,10 +25,10 @@
 
 
         <!-- Application codebase -->
-        <Resource Name="AppName.PKG">
+        <Resource Name="AngularTemplate.PKG">
           <Attribute Name="Directory">cls</Attribute>
         </Resource>
-        <Resource Name="AppName.Installer.CLS" Preload="true">
+        <Resource Name="AngularTemplate.Installer.CLS" Preload="true">
           <Attribute Name="Directory">cls</Attribute>
         </Resource>
         <Resource Name="/ng/app" ProcessorClass="pkg.isc.ipm.js.angular.processor">
@@ -36,21 +36,21 @@
         </Resource>
         <Resource Name="/ng/app/dist/app" ProcessorClass="CSPApplication" Generated="true">
           <Attribute Name="DispatchClass">pkg.isc.ipm.js.angular.pathLocationHandler</Attribute>
-          <Attribute Name="Directory">${cspdir}${namespace}/app-name</Attribute>
+          <Attribute Name="Directory">${cspdir}${namespace}/angular-template</Attribute>
           <Attribute Name="Url">/${namespace}</Attribute>
           <Attribute Name="ServeFiles">1</Attribute>
           <Attribute Name="Recurse">1</Attribute>
           <Attribute Name="ServeFilesTimeout">0</Attribute>
         </Resource>
-        <Resource Name="/app-name/api" ProcessorClass="CSPApplication" Generated="true">
-          <Attribute Name="DispatchClass">AppName.rest.Handler</Attribute>
+        <Resource Name="/angular-template/api" ProcessorClass="CSPApplication" Generated="true">
+          <Attribute Name="DispatchClass">AngularTemplate.rest.Handler</Attribute>
           <Attribute Name="Url">/${namespace}/api</Attribute>
           <Attribute Name="Recurse">1</Attribute>
           <Attribute Name="PasswordAuthEnabled">1</Attribute>
           <Attribute Name="UnauthenticatedEnabled">0</Attribute>
         </Resource>
         <Resource Name="/api/openapi.json" ProcessorClass="pkg.isc.ipm.js.openApiProcessor">
-          <Attribute Name="DispatchClass">AppName.rest.Handler</Attribute>
+          <Attribute Name="DispatchClass">AngularTemplate.rest.Handler</Attribute>
           <Attribute Name="Url">/${namespace}/api</Attribute>
           <Attribute Name="BaseUrl">/api</Attribute>
           <Attribute Name="TargetFolder">/ng/app/src/app/generated</Attribute>
@@ -58,15 +58,15 @@
           <Attribute Name="AdditionalProperties">paramNaming=original,queryParamObjectFormat=key,useSingleRequestParameter=true,ngVersion=13.3.4</Attribute>
         </Resource>
       </Resources>
-      <Invoke Class="AppName.Installer" Method="SetCSSToUTF8" />
-            <Invoke Class="AppName.Installer" Method="AddCodeDBReadForStaticFiles">
+      <Invoke Class="AngularTemplate.Installer" Method="SetCSSToUTF8" />
+            <Invoke Class="AngularTemplate.Installer" Method="AddCodeDBReadForStaticFiles">
         <Arg>/${namespace}</Arg>
         <Arg>#{..Name}</Arg>
       </Invoke>
-      <Invoke Class="AppName.Installer" Method="ApplySecurityChanges">
+      <Invoke Class="AngularTemplate.Installer" Method="ApplySecurityChanges">
         <Arg>/${namespace}</Arg>
       </Invoke>
-      <Invoke Class="AppName.Installer" Method="RemoveSecurityChanges" Phase="Unconfigure" />
+      <Invoke Class="AngularTemplate.Installer" Method="RemoveSecurityChanges" Phase="Unconfigure" />
       <LifecycleClass>pkg.isc.ipm.js.openApiModule</LifecycleClass>
       <Defaults>
         <ProcessorDefault Class="Default.Include">

@@ -1,4 +1,4 @@
-Class AppName.rest.Handler Extends %pkg.isc.rest.handler
+Class AngularTemplate.rest.Handler Extends %pkg.isc.rest.handler
 {
 
 Parameter UseSession As BOOLEAN = 1;
@@ -10,7 +10,7 @@ ClassMethod AuthenticationStrategy() As %Dictionary.CacheClassname
 
 ClassMethod CheckResourcePermitted(resourceClass As %Dictionary.Classname) As %Boolean
 {
-	return $Piece(resourceClass,".rest") = "AppName"
+	return $Piece(resourceClass,".rest") = "AngularTemplate"
 }
 
 ClassMethod GetUserResource(pFullUserInfo As %DynamicObject) As %pkg.isc.rest.authentication.platformUser
