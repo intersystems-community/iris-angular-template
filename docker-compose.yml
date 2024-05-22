@@ -6,7 +6,6 @@ services:
     command: --check-caps false
     ports: 
       - 8080:52773
-      - 8000:4200
     volumes:
       - ./:/irisdev/app
       - /irisdev/app/ng/app/node_modules

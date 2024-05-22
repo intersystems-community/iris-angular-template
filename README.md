@@ -24,7 +24,7 @@ docker-compose exec iris iris session iris -U APP-NAME
 to open and iris terminal, and then
 
 ```
-zpm "app-name activate --verbose"
+zpm "app-name activate -verbose"
 ```
 
 to activate the zpm module and build the application.

@@ -58,7 +58,6 @@
           <Attribute Name="AdditionalProperties">paramNaming=original,queryParamObjectFormat=key,useSingleRequestParameter=true,ngVersion=13.3.4</Attribute>
         </Resource>
       </Resources>
-      <Invoke Class="AppName.Installer" Method="FixSourceMappings" Phase="Reload" />
       <Invoke Class="AppName.Installer" Method="SetCSSToUTF8" />
             <Invoke Class="AppName.Installer" Method="AddCodeDBReadForStaticFiles">
         <Arg>/${namespace}</Arg>

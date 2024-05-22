@@ -14,16 +14,24 @@ USER root
 
 RUN mkdir /irisdev/app/ng/app/node_modules -p
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /irisdev/app -R
+
 VOLUME /irisdev/app
 
 RUN apt update && apt-get -y install git
-RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /irisdev/app -R
 
 # Install Node
 RUN apt-get -y install curl
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
-RUN node -v
+
+# Install Java (for OpenAPI generation)
+RUN apt-get install -y openjdk-11-jre-headless && \
+    apt-get clean;
+
+RUN cd ng/app && npm install @openapitools/openapi-generator-cli -g
+RUN wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.6.0/openapi-generator-cli-7.6.0.jar -O openapi-generator-cli.jar
+
+RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /usr/lib/node_modules -R
 
 
 USER ${ISC_PACKAGE_MGRUSER}
