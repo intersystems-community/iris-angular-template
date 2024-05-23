@@ -1,4 +1,4 @@
- [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/iris-fullstack-template)
+
 # InterSystems IRIS Angular Full Stack demo and template
 This repository contains a sample application which consists of InterSystems IRIS REST API and Frontend Application which demoes a coffee-maker shop. 
 
