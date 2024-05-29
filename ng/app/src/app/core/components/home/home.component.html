@@ -15,8 +15,12 @@
               <p>The Angular application can be hosted locally using <code>ng serve</code>, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command <code>zpm "angular-template activate"</code> in your IRIS terminal.</p>
               <p>The "proxy.conf.js" file is used to point to the IRIS instance you are using. If working with a remote iris instance, you can change the proxy to point to that instance.</p>
               <p>For information on how to set up VSCode for IRIS, refrer to the documentation: <a href="https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=GVSCO">Documentation</a></p>
+              <h2>Demo</h2>
+              <p>The following button is a demo for connecting the angular application to an IRIS Rest Service. You can use its structure as a template for future components.</p>
+              <button mat-raised-button color="primary" (click)="openDialog()">Demo</button>
               <h2>Source Control</h2>
               <p>The Scaffold uses <a href="https://github.com/intersystems/git-source-control/tree/main">git-source-control</a> to manage server-side source control using Git. For more information visit the github repository.</p>
+
             </mat-tab>
             <mat-tab label="REST Services">
               <h1>REST Services</h1>

@@ -6,3 +6,4 @@ export * from './buildDocumentationPost200Response';
 export * from './jSONError';
 export * from './jSONErrorErrorsInner';
 export * from './platformUserOutput';
+export * from './simpleResponseOutput';

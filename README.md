@@ -12,26 +12,48 @@ For more information on how to use and customize the angular template, see the [
 ### Docker way
 Clone the repo, run:
 ```
+set DOCKER_BUILDKIT=1
+```
+and then
+```
 docker-compose up -d
 ```
+There are 2 options for running your angular application, depending on preference. 
 
-To build the angular application in the container, run
+#### Within IRIS
+To have the angular application run from within IRIS, run
 
 ```
 docker-compose exec iris iris session iris -U angular-template
 ```
 
-to open and iris terminal, and then
+to open an iris terminal, and then
 
 ```
 zpm "angular-template activate -verbose"
 ```
 
-to activate the zpm module and build the application.
+to activate the zpm module and build the application. This should be done anytime you want changes in your angular code to be reflected in the served application.
 
 Run the application with URL: http://localhost:8080/angular-template/
 
+#### Locally
+
+To run the application locally, simply run the command
+
+```
+docker-compose exec iris bash -c "cd ng/app ; ng serve --open"
+```
+
+This will build your angular application in the container rather than in IRIS, and can be accessed at the URL: http://localhost:4200/angular-template/
+
+This is recommended if you are doing local Angular development, since your changes will automatically be rebuilt and served.
+
 ## Development
+### Code Changes
+
+The angular application lives within the /ng/app/ folder, while all Objectscript code lives in the /cls/ folder.
+
 ### Prerequisites
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
 This repository is ready to code in VSCode with ObjectScript plugin.

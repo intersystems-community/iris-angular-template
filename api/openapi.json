@@ -54,10 +54,14 @@
         },
         "type":"object"
       },
+      "TextError":{
+        "description":"A string-format representation of the error that occurred",
+        "type":"string"
+      },
       "platform-user_output":{
         "properties":{
           "Username":{
-            "example":"irisowner",
+            "example":"etamarch",
             "type":"string"
           },
           "_id":{
@@ -67,6 +71,18 @@
         "readOnly":true,
         "required":[
           "_id"
+        ],
+        "type":"object"
+      },
+      "simple-response_output":{
+        "properties":{
+          "Message":{
+            "type":"string"
+          }
+        },
+        "readOnly":true,
+        "required":[
+          "Message"
         ],
         "type":"object"
       }
@@ -261,6 +277,59 @@
             "description":"Locked: Another build is currently in-progress, try again later"
           }
         }
+      }
+    },
+    "/demo/$demo-call":{
+      "get":{
+        "description":"Performs the demo-call action.",
+        "responses":{
+          "200":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/simple-response_output"
+                }
+              }
+            },
+            "description":"A successful response"
+          },
+          "403":{
+            "$ref":"#/components/responses/403"
+          },
+          "406":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/JSONError"
+                }
+              },
+              "default":{
+                "schema":{
+                  "$ref":"#/components/schemas/TextError"
+                }
+              }
+            },
+            "description":"Unsupported Mediatype: The requested mediatype is not compatible with any supported response mediatypes."
+          },
+          "415":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/JSONError"
+                }
+              },
+              "default":{
+                "schema":{
+                  "$ref":"#/components/schemas/TextError"
+                }
+              }
+            },
+            "description":"Unsupported Mediatype: Mediatype is not compatible with any supported request mediatypes."
+          }
+        },
+        "tags":[
+          "demo"
+        ]
       }
     }
   },

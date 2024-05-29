@@ -3,7 +3,7 @@
   <Document name="angular-template.ZPM">
     <Module>
       <Name>angular-template</Name>
-      <Version>0.1.0</Version>
+      <Version>0.2.0</Version>
       <Description>Full Stack Application Template</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>.</SourcesRoot>
@@ -59,7 +59,7 @@
         </Resource>
       </Resources>
       <Invoke Class="AngularTemplate.Installer" Method="SetCSSToUTF8" />
-            <Invoke Class="AngularTemplate.Installer" Method="AddCodeDBReadForStaticFiles">
+        <Invoke Class="AngularTemplate.Installer" Method="AddCodeDBReadForStaticFiles">
         <Arg>/${namespace}</Arg>
         <Arg>#{..Name}</Arg>
       </Invoke>

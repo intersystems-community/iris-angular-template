@@ -14,6 +14,7 @@ USER root
 
 RUN mkdir /irisdev/app/ng/app/node_modules -p
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /irisdev/app -R
+RUN chmod a+rwx /irisdev/app/ng/app/node_modules -R
 
 VOLUME /irisdev/app
 
@@ -29,19 +30,14 @@ RUN apt-get install -y openjdk-11-jre-headless && \
     apt-get clean;
 
 RUN cd ng/app && npm install @openapitools/openapi-generator-cli -g
-RUN wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.6.0/openapi-generator-cli-7.6.0.jar -O openapi-generator-cli.jar
 
-RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /usr/lib/node_modules -R
+# Allow zpm "angular-template generate" to work
+RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /usr/lib/node_modules/@openapitools -R
 
 
 USER ${ISC_PACKAGE_MGRUSER}
 
-
-ARG TESTS=0
-ARG MODULE="angular-template"
-ARG NAMESPACE="angular-template"
-
-RUN --mount=type=bind,src=.,dst=. \
+RUN --mount=type=bind,src=. \
     iris start IRIS && \
 	iris session IRIS < iris.script && \
     iris stop IRIS quietly
