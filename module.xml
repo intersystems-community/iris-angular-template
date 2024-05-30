@@ -3,7 +3,7 @@
   <Document name="angular-template.ZPM">
     <Module>
       <Name>angular-template</Name>
-      <Version>0.1.1</Version>
+      <Version>0.1.2</Version>
       <Description>Full Stack Application Template</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>.</SourcesRoot>
