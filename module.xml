@@ -3,7 +3,7 @@
   <Document name="angular-template.ZPM">
     <Module>
       <Name>angular-template</Name>
-      <Version>0.1.2</Version>
+      <Version>0.2.0</Version>
       <Description>Full Stack Application Template</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>.</SourcesRoot>
@@ -19,6 +19,10 @@
                 <ModuleReference>
           <Name>git-source-control</Name>
           <Version>^2.3.0</Version>
+        </ModuleReference>
+        <ModuleReference>
+          <Name>isc.codetidy</Name>
+          <Version>^1.1.5</Version>
         </ModuleReference>
       </Dependencies>
       <Resources>
@@ -63,6 +67,7 @@
         <Arg>/${namespace}</Arg>
         <Arg>#{..Name}</Arg>
       </Invoke>
+      <Invoke Class="AngularTemplate.Installer" Method="SetupCodeTidy" />
       <Invoke Class="AngularTemplate.Installer" Method="ApplySecurityChanges">
         <Arg>/${namespace}</Arg>
       </Invoke>

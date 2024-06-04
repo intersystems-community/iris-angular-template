@@ -62,6 +62,7 @@ XData MyManifest [ XMLNamespace = INSTALLER ]
 <Namespace Name="${Namespace}" Create="no">
 <!-- ZPM load -->
 <Invoke Class="AngularTemplate.Installer" Method="ZPMLoad" />
+<Invoke Class="AngularTemplate.Installer" Method="SetupCodeTidy" />
 </Namespace>
 
 <Namespace Name="${SourceNamespace}" Create="no">
@@ -263,6 +264,18 @@ ClassMethod RunSourceControlSetup(namespace As %String = {$Namespace}, environme
 
 	
 	$$$ThrowOnError(sc)
+}
+
+ClassMethod SetupCodeTidy() {
+	do ##class(pkg.isc.codetidy.Utils).SetupExtension()
+	set ^Config("CodeTidy","formatonsave") = 1
+	set ^Config("CodeTidy","resequence") = 1
+	set ^Config("CodeTidy","indentglobal") = 1
+	set ^Config("CodeTidy","indentstringglobal") = $c(9)
+	set ^Config("CodeTidy","tweak") = "warn"
+	set ^Config("CodeTidy","codetidy") = 0
+	set ^Config("CodeTidy","usemacrocomments") = 0
+	set ^Config("CodeTidy","eslintenabled") = 1
 }
 
 ClassMethod AddCodeDBReadForStaticFiles(webApplication As %String, roleName As %String)
