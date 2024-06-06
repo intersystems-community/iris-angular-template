@@ -3,7 +3,7 @@
   <Document name="angular-template.ZPM">
     <Module>
       <Name>angular-template</Name>
-      <Version>0.2.0</Version>
+      <Version>0.3.0</Version>
       <Description>Full Stack Application Template</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>.</SourcesRoot>
@@ -16,7 +16,7 @@
           <Name>isc.rest</Name>
           <Version>^1.2.1</Version>
         </ModuleReference>
-                <ModuleReference>
+        <ModuleReference>
           <Name>git-source-control</Name>
           <Version>^2.3.0</Version>
         </ModuleReference>
@@ -25,53 +25,49 @@
           <Version>^1.1.5</Version>
         </ModuleReference>
       </Dependencies>
-      <Resources>
 
+      <!-- Application codebase -->
+      <Resource Name="AngularTemplate.PKG" Directory="cls" />
+      <Resource Name="AngularTemplate.Installer.CLS" Preload="true" Directory="cls" />
 
-        <!-- Application codebase -->
-        <Resource Name="AngularTemplate.PKG">
-          <Attribute Name="Directory">cls</Attribute>
-        </Resource>
-        <Resource Name="AngularTemplate.Installer.CLS" Preload="true">
-          <Attribute Name="Directory">cls</Attribute>
-        </Resource>
-        <Resource Name="/ng/app" ProcessorClass="pkg.isc.ipm.js.angular.processor">
-          <Attribute Name="baseHref">/${namespace}</Attribute>
-        </Resource>
-        <Resource Name="/ng/app/dist/app" ProcessorClass="CSPApplication" Generated="true">
-          <Attribute Name="DispatchClass">pkg.isc.ipm.js.angular.pathLocationHandler</Attribute>
-          <Attribute Name="Directory">${cspdir}${namespace}/angular-template</Attribute>
-          <Attribute Name="Url">/${namespace}</Attribute>
-          <Attribute Name="ServeFiles">1</Attribute>
-          <Attribute Name="Recurse">1</Attribute>
-          <Attribute Name="ServeFilesTimeout">0</Attribute>
-        </Resource>
-        <Resource Name="/angular-template/api" ProcessorClass="CSPApplication" Generated="true">
-          <Attribute Name="DispatchClass">AngularTemplate.rest.Handler</Attribute>
-          <Attribute Name="Url">/${namespace}/api</Attribute>
-          <Attribute Name="Recurse">1</Attribute>
-          <Attribute Name="PasswordAuthEnabled">1</Attribute>
-          <Attribute Name="UnauthenticatedEnabled">0</Attribute>
-        </Resource>
-        <Resource Name="/api/openapi.json" ProcessorClass="pkg.isc.ipm.js.openApiProcessor">
-          <Attribute Name="DispatchClass">AngularTemplate.rest.Handler</Attribute>
-          <Attribute Name="Url">/${namespace}/api</Attribute>
-          <Attribute Name="BaseUrl">/api</Attribute>
-          <Attribute Name="TargetFolder">/ng/app/src/app/generated</Attribute>
-          <Attribute Name="Generator">typescript-angular</Attribute>
-          <Attribute Name="AdditionalProperties">paramNaming=original,queryParamObjectFormat=key,useSingleRequestParameter=true,ngVersion=13.3.4</Attribute>
-        </Resource>
-      </Resources>
+      <!-- Angular Application -->
+      <Resource Name="/ng/app" ProcessorClass="pkg.isc.ipm.js.angular.processor" baseHref="/${namespace}" />
+
+      <!-- Angular Application - Web Application -->
+      <CSPApplication Url="/${namespace}"
+        DispatchClass="pkg.isc.ipm.js.angular.pathLocationHandler"
+        SourcePath="/ng/app/dist/app"
+        DeployPath="${cspdir}${namespace}/angular-template"
+        ServeFiles="1" Recurse="1" ServeFilesTimeout="0" Generated="true" />
+
+      <!-- REST - Web Application -->
+      <CSPApplication Url="/${namespace}/api"
+        DispatchClass="AngularTemplate.rest.Handler"
+        Recurse="1" PasswordAuthEnabled="1" UnauthenticatedEnabled="0"
+        Generated="true" />
+      
+      <!-- OpenAPI Generation -->
+      <Resource Name="/api/openapi.json"
+        ProcessorClass="pkg.isc.ipm.js.openApiProcessor"
+        DispatchClass="AngularTemplate.rest.Handler"
+        Url="/${namespace}/api" BaseUrl="/api"
+        TargetFolder="/ng/app/src/app/generated"
+        Generator="typescript-angular"
+        AdditionalProperties="paramNaming=original,queryParamObjectFormat=key,useSingleRequestParameter=true,ngVersion=13.3.4" />
+
       <Invoke Class="AngularTemplate.Installer" Method="SetCSSToUTF8" />
-        <Invoke Class="AngularTemplate.Installer" Method="AddCodeDBReadForStaticFiles">
+      <Invoke Class="AngularTemplate.Installer" Method="AddCodeDBReadForStaticFiles">
         <Arg>/${namespace}</Arg>
         <Arg>#{..Name}</Arg>
       </Invoke>
       <Invoke Class="AngularTemplate.Installer" Method="SetupCodeTidy" />
       <Invoke Class="AngularTemplate.Installer" Method="ApplySecurityChanges">
         <Arg>/${namespace}</Arg>
+        <Arg>#{..Name}</Arg>
       </Invoke>
-      <Invoke Class="AngularTemplate.Installer" Method="RemoveSecurityChanges" Phase="Unconfigure" />
+      <Invoke Class="AngularTemplate.Installer" Method="RemoveSecurityChanges" Phase="Unconfigure">
+        <Arg>#{..Name}</Arg>
+      </Invoke>
       <LifecycleClass>pkg.isc.ipm.js.openApiModule</LifecycleClass>
       <Defaults>
         <ProcessorDefault Class="Default.Include">

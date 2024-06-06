@@ -165,7 +165,7 @@ ClassMethod SetCSSToUTF8()
     Set ^%SYS("CSP","MimeFileClassify","JS")=$lb("application/javascript",0,"utf-8")
 }
 
-ClassMethod ApplySecurityChanges(webApplication As %String)
+ClassMethod ApplySecurityChanges(webApplication As %String, roleName As %String = {..#RoleName})
 {
     Set oldNS = $Namespace
     New $Namespace
@@ -202,7 +202,6 @@ ClassMethod ApplySecurityChanges(webApplication As %String)
     // Create role granting R permission on namespace-default routine DB resource
     // This is the least-access means to be able to use the REST handler class
     // in unauthenticated mode
-    Set roleName = ..#RoleName
     Set roleProps("Description") = "Role granting "_$ListToString(grantPermissions," and ")
     Set roleProps("Resources") = $ListToString(grantPermissions)
     Set roleProps("GrantedRoles") = ""
@@ -218,14 +217,13 @@ ClassMethod ApplySecurityChanges(webApplication As %String)
     $$$ThrowOnError(##class(Security.Applications).Modify(webApplication,.props))
 }
 
-ClassMethod RemoveSecurityChanges()
+ClassMethod RemoveSecurityChanges(roleName As %String = {..#RoleName})
 {
     Set oldNS = $Namespace
     New $Namespace
     Set $Namespace = "%SYS"
     
     Try {
-        Set roleName = ..#RoleName
         If ##class(Security.Roles).Exists(roleName) {
             Write !,"Removing role: ",roleName
             $$$ThrowOnError(##class(Security.Roles).Delete(roleName))

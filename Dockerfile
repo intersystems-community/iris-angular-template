@@ -1,12 +1,6 @@
 
-ARG IMAGE=store/intersystems/iris-community:2020.1.0.199.0
-ARG IMAGE=intersystemsdc/iris-community:2019.4.0.383.0-zpm
-ARG IMAGE=intersystemsdc/iris-community:2020.1.0.209.0-zpm
-ARG IMAGE=intersystemsdc/iris-community:2020.2.0.196.0-zpm
-ARG IMAGE=intersystemsdc/iris-community:2020.3.0.200.0-zpm
 ARG IMAGE=intersystemsdc/iris-community
 FROM $IMAGE
-
 
 WORKDIR /irisdev/app
 
@@ -34,8 +28,7 @@ RUN cd ng/app && npm install @openapitools/openapi-generator-cli -g
 # Allow zpm "angular-template generate" to work
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /usr/lib/node_modules/@openapitools -R
 
-RUN npm i -g @angular/cli@14.2.3
-
+RUN npm i -g @angular/cli
 
 USER ${ISC_PACKAGE_MGRUSER}
 

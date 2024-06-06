@@ -1,30 +1,30 @@
 Overview
 ========
 
-The scaffold is a basic angular application that interfaces with IRIS. It includes a script for automated setup so that developers have a ready environment to code in.
+This template is a basic angular application that interfaces with IRIS. It includes a script for automated setup so that developers have a ready environment in which to code.
 
-The AppScaffold uses the [InterSystems Package Manager](https://github.com/intersystems/ipm) to easily install applications onto new machines.
-
-The rest of the tabs on this page contain some useful guide on navigating features of the scaffold app
+The template uses the [InterSystems Package Manager (IPM)](https://github.com/intersystems/ipm) to easily install applications onto new machines.
 
 Basic Use
 ---------
 
 The Angular application can be hosted locally using `ng serve`, as well as on your IRIS instance. In order to re-run the angular build that is hosted on your IRIS instance, run the command `zpm "angular-template activate"` in your IRIS terminal.
 
-The "proxy.conf.js" file is used to point to the IRIS instance you are using. If working with a remote iris instance, you can change the proxy to point to that instance.
+The "proxy.conf.js" file is used to point to the IRIS instance you are using. If working with a remote IRIS instance, you can change the proxy to point to that instance.
 
 For information on how to set up VSCode for IRIS, refrer to the documentation: [Documentation](https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=GVSCO)
 
 Source Control
 --------------
 
-The Scaffold uses [git-source-control](https://github.com/intersystems/git-source-control/tree/main) to manage server-side source control using Git. For more information visit the github repository.
+The template uses [git-source-control](https://github.com/intersystems/git-source-control) to enable embedded/server-side source control using Git. For more information visit the GitHub repository.
 
 REST Services
 =============
 
-The AppScaffold uses the isc.rest package from zpm for REST services, which is installed during setup.
+The template uses the [isc.rest](https://github.com/intersystems/isc-rest) package from the Open Exchange for REST services. It is installed automatically as an IPM dependency. For full details, read the documentation and user guide in the GitHub repository for isc.rest.
+
+A few simple notes on use of isc.rest:
 
 Creating a REST Service
 -----------------------
@@ -39,7 +39,7 @@ Parameter RESOURCENAME = "example";
 
 After writing a method or query that we want to call from angular, we must define an ActionMap, to expose the REST endpoint. The actionmap can have many action endpoints.
 
-If we wanted to call a `DoSomething` class in our code from an endpoint, it will be as follows:
+If we wanted to call a `DoSomething` classmethod in our code from an endpoint, it will be as follows:
 
 ```
 XData ActionMap [XMLNamespace = “http://www.instersystems.com/_pkg/isc/rest/action" ] {
@@ -64,16 +64,16 @@ We can add each future action that we want to allow to the CheckPermission metho
 OpenAPI generator
 -----------------
 
-OpenAPI generator is a tool that generates REST API documentation from a REST API specification. The scaffold uses the openapi-generator-cli to generate the documentation, and turn it into angular services.
+OpenAPI Generator is a tool that generates REST API documentation from a REST API specification. The template uses openapi-generator-cli to generate the documentation, TypeScript models, and Angular services.
 
 OpenAPI generation requires the installation of Java version 11 on your system.
 
-To use the generator with the Scaffold, simply run the command `zpm "angular-template generate"` in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.
+To use the generator with the template, simply run the command `zpm "angular-template generate"` in your iris terminal locally. This will generate services and function inside of a ./generated folder in your angular application root.
 
 Authentication
 ==============
 
-The scaffold comes with IRIS authentication, meaning that your credentials for the IRIS instance would be used to log into the angular application. If this is the desired funnctionality, nothing needs to be changed. If you however want to use a different authentication method, you can enable delegated authentication for the web application.
+The template comes with IRIS authentication, meaning that your credentials for the IRIS instance would be used to log into the angular application. If this is the desired funnctionality, nothing needs to be changed. If you  want to use a different authentication method, you can enable delegated authentication for the web application.
 
 Delegated Authentication
 ------------------------
@@ -89,7 +89,7 @@ Below are some resources that could be useful for your development.
 *   [InterSystems Community](https://community.intersystems.com/)
 
 
-# useful commands
+# Useful Commands
 ## clean up docker 
 ```
 docker system prune -f
@@ -118,7 +118,7 @@ kill ^ISCLOG
 set ^%ISCLOG=3
 ```
 
-## select zpm test registry
+## select IPM test registry
 ```
 repo -n registry -r -url https://test.pm.community.intersystems.com/registry/ -user test -pass PassWord42
 ```
