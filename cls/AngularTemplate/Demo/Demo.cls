@@ -7,7 +7,6 @@ ClassMethod RunDemo() As AngularTemplate.rest.Model.SimpleResponse
 {
 	set response = ##class(AngularTemplate.rest.Model.SimpleResponse).%New()
 	set response.Message = "Hello World from IRIS!"
-	set foo = "bar"
 	quit response
 }
 
