@@ -30,6 +30,7 @@
       <Resource Name="AngularTemplate.PKG" Directory="cls" />
       <Resource Name="AngularTemplate.Installer.CLS" Preload="true" Directory="cls" />
 
+      <!-- Unit tests -->
       <UnitTest Name="/test" Package="UnitTest.AngularTemplate" />
 
       <!-- Angular Application -->
