@@ -10,6 +10,6 @@
     "links": {
       "angular-template": "http://localhost:8080/angular-template/"
     },
-    "active": false
+    "active": true
   }
 }

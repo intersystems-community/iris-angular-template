@@ -32,9 +32,9 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    const authdata = window.btoa(username + ':' + password);
+    const authdata = btoa(username + ':' + password);
     this.defaultService.defaultHeaders = this.defaultService.defaultHeaders.set('Authorization', `Basic ${authdata}`);
-    return this.defaultService.authStatusGet('body').pipe(map(user => {
+    return this.defaultService.authStatusGet().pipe(map((user: PlatformUserOutput) => {
       sessionStorage.setItem(AuthenticationService.USER_KEY, JSON.stringify(user));
       sessionStorage.setItem(AuthenticationService.AUTH_KEY, authdata);
       this.userSubject.next(user);

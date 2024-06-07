@@ -28,7 +28,7 @@ RUN cd ng/app && npm install @openapitools/openapi-generator-cli -g
 # Allow zpm "angular-template generate" to work
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /usr/lib/node_modules/@openapitools -R
 
-RUN npm i -g @angular/cli
+RUN npm i -g @angular/cli@14.2.3
 
 USER ${ISC_PACKAGE_MGRUSER}
 

@@ -42,7 +42,7 @@ Run the application in your browser at this URL: http://localhost:8080/angular-t
 To run the application locally, follow the above steps for installing the application in IRIS, and then simply run the command:
 
 ```
-docker-compose exec iris bash -c "cd ng/app; npm install ; ng serve --host 0.0.0.0"
+docker-compose exec iris bash -c "cd ng/app; npm install; ng serve --host 0.0.0.0"
 ```
 
 This will build your angular application in the container rather than in IRIS, and can be accessed at the URL: http://localhost:4200/

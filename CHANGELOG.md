@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file
 
 ### Fixed
 - Miscellaneous cleanup of documentation, installation processes
+- Logout works on built/deployed Angular UI
 
 ## [0.2.0] - 2024-06-04
 
