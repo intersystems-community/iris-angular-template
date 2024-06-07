@@ -4,3 +4,4 @@ Class AngularTemplate.rest.Model.SimpleResponse Extends (%RegisteredObject, %pkg
 Property Message As %String(MAXLEN = "") [ Required ];
 
 }
+

@@ -344,3 +344,4 @@ ClassMethod AddCodeDBReadForStaticFiles(webApplication As %String, roleName As %
 }
 
 }
+

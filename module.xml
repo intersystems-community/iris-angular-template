@@ -30,6 +30,8 @@
       <Resource Name="AngularTemplate.PKG" Directory="cls" />
       <Resource Name="AngularTemplate.Installer.CLS" Preload="true" Directory="cls" />
 
+      <UnitTest Name="/test" Package="UnitTest.AngularTemplate" />
+
       <!-- Angular Application -->
       <Resource Name="/ng/app" ProcessorClass="pkg.isc.ipm.js.angular.processor" baseHref="/${namespace}" />
 

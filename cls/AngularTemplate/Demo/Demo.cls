@@ -6,7 +6,7 @@ Parameter RESOURCENAME = "demo";
 ClassMethod RunDemo() As AngularTemplate.rest.Model.SimpleResponse
 {
 	set response = ##class(AngularTemplate.rest.Model.SimpleResponse).%New()
-	set response.Message = "Hello World from IRIS!"
+	set response.Message = "This is such a cool Tech Exchange presentation! Hi Jean!"
 	quit response
 }
 
@@ -24,3 +24,4 @@ XData ActionMap [ XMLNamespace = "http://www.intersystems.com/_pkg/isc/rest/acti
 }
 
 }
+

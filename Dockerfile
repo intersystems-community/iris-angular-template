@@ -29,8 +29,8 @@ USER ${ISC_PACKAGE_MGRUSER}
 
 WORKDIR /irisdev/app
 
+RUN git config --global --add safe.directory /irisdev/app
+
 RUN iris start IRIS && \
 	iris session IRIS < iris.script && \
     iris stop IRIS quietly
-
-RUN git config --global --add safe.directory /irisdev/app
