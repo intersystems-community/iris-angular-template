@@ -12,6 +12,13 @@ ClassMethod SetupBASE()
 	do ..setup(.vars)
 }
 
+ClassMethod SetupTEST()
+{
+	set vars("Environment") = "TEST"
+	set vars("SourceNamespace") = $namespace
+	do ..setup(.vars)
+}
+
 /// Manifest Definition.
 XData MyManifest [ XMLNamespace = INSTALLER ]
 {
@@ -69,22 +76,16 @@ XData MyManifest [ XMLNamespace = INSTALLER ]
 <Namespace Name="${Namespace}" Create="no">
 <!-- ZPM load -->
 <Invoke Class="AngularTemplate.Installer" Method="ZPMLoad" />
+<Invoke Class="AngularTemplate.Installer" Method="RunSourceControlSetup" />
 <Invoke Class="AngularTemplate.Installer" Method="SetupCodeTidy" />
 </Namespace>
 
 <Namespace Name="${SourceNamespace}" Create="no">
 
 <!-- Configure Source Control -->
-<!--<Invoke Class="AngularTemplate.Installer" Method="RunSourceControlSetup" />-->
+<!---->
 </Namespace>
 </Manifest>
-}
-
-ClassMethod SetupTEST()
-{
-	set vars("Environment") = "TEST"
-	set vars("SourceNamespace") = $namespace
-	do ..setup(.vars)
 }
 
 ClassMethod SetupUAT()
@@ -255,11 +256,29 @@ ClassMethod RunSourceControlSetup(namespace As %String = {$Namespace}, environme
 		set old = ..ToggleIRISLIBReadOnly(0)
 		
 		// Set up source control
-		do ##class(SourceControl.Git.API).Configure()
+		// TODO: Refactor once https://github.com/intersystems/git-source-control/issues/262 is addressed
+		$$$ThrowOnError(##class(%Studio.SourceControl.Interface).SourceControlClassSet("SourceControl.Git.Extension"))
+		set mappingsNode = ##class(SourceControl.Git.Utils).MappingsNode()
+		if '$data(@mappingsNode) {
+			do ##class(SourceControl.Git.Utils).SetDefaultMappings(mappingsNode)
+			write !, "Configured default mappings for classes, routines, and include files. You can customize these in the global:", !?5, mappingsNode
+		}
+
+		set ^SYS("SourceControl","Git","settings","gitBinPath")=""
+		set ^SYS("SourceControl","Git","settings","mappings","CLS","*")="cls/"
+		set ^SYS("SourceControl","Git","settings","mappings","CLS","UnitTest")="test/"
+		set ^SYS("SourceControl","Git","settings","mappings","INC","*")="inc/"
+		set ^SYS("SourceControl","Git","settings","mappings","MAC","*")="rtn/"
+		set ^SYS("SourceControl","Git","settings","namespaceTemp")="/tmp/angular-template/"
+		set ^SYS("SourceControl","Git","settings","percentClassReplace")=""
+		set ^SYS("SourceControl","Git","settings","pullEventClass")="SourceControl.Git.PullEventHandler.Default"
+		set ^SYS("SourceControl","Git","settings","settingsUIReadOnly")=0
+		set ^SYS("SourceControl","Git","settings","ssh","privateKeyFile")=""
+		set ^SYS("SourceControl","Git","settings","user","irisowner","gitUserEmail")="irisowner@b01d34432e99"
+		set ^SYS("SourceControl","Git","settings","user","irisowner","gitUserName")="irisowner"
 	} catch e {
 		set sc = e.AsStatus()
 	}
-
 	
 	$$$ThrowOnError(sc)
 }

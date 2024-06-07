@@ -32,3 +32,5 @@ WORKDIR /irisdev/app
 RUN iris start IRIS && \
 	iris session IRIS < iris.script && \
     iris stop IRIS quietly
+
+RUN git config --global --add safe.directory /irisdev/app
