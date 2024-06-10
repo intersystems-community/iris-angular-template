@@ -8,14 +8,20 @@
       <Packaging>module</Packaging>
       <SourcesRoot>.</SourcesRoot>
       <Dependencies>
-        <ModuleReference>
-          <Name>isc.ipm.js</Name>
-          <Version>^1.1.2</Version>
-        </ModuleReference>
+        <!-- isc.rest + isc.ipm.js for REST APIs, Angular, OpenAPI -->
         <ModuleReference>
           <Name>isc.rest</Name>
           <Version>^1.2.1</Version>
         </ModuleReference>
+        <ModuleReference>
+          <Name>isc.ipm.js</Name>
+          <Version>^1.1.2</Version>
+        </ModuleReference>
+
+        <!-- dev dependencies:
+          git-source-control for source control,
+          isc.codetidy for code formatting
+        -->
         <ModuleReference>
           <Name>git-source-control</Name>
           <Version>^2.3.0</Version>
@@ -33,10 +39,10 @@
       <!-- Unit tests -->
       <UnitTest Name="/test" Package="UnitTest.AngularTemplate" />
 
-      <!-- Angular Application -->
+      <!-- Angular Application - source + compilation behavior -->
       <Resource Name="/ng/app" ProcessorClass="pkg.isc.ipm.js.angular.processor" baseHref="/${namespace}" />
 
-      <!-- Angular Application - Web Application -->
+      <!-- Angular Application - deployed as Web Application -->
       <CSPApplication Url="/${namespace}"
         DispatchClass="pkg.isc.ipm.js.angular.pathLocationHandler"
         SourcePath="/ng/app/dist/app"
@@ -49,7 +55,7 @@
         Recurse="1" PasswordAuthEnabled="1" UnauthenticatedEnabled="0"
         Generated="true" />
       
-      <!-- OpenAPI Generation -->
+      <!-- OpenAPI Generation, via isc.ipm.js -->
       <Resource Name="/api/openapi.json"
         ProcessorClass="pkg.isc.ipm.js.openApiProcessor"
         DispatchClass="AngularTemplate.rest.Handler"
