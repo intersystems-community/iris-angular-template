@@ -10,7 +10,7 @@ ClassMethod AuthenticationStrategy() As %Dictionary.CacheClassname
 
 ClassMethod CheckResourcePermitted(resourceClass As %Dictionary.Classname) As %Boolean
 {
-	return $Piece(resourceClass,".") = "AngularTemplate"
+	return $piece(resourceClass, ".") = "AngularTemplate"
 }
 
 ClassMethod GetUserResource(pFullUserInfo As %DynamicObject) As %pkg.isc.rest.authentication.platformUser
@@ -28,4 +28,3 @@ ClassMethod Login(skipheader As %Boolean = 1) As %Status [ ProcedureBlock = 0 ]
 }
 
 }
-
