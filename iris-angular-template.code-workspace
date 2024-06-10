@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "angular-template:ANGULAR-TEMPLATE",
+			"uri": "isfs://angular-template:angular-template/?filter=*.*"
+		}
+	],
+	"settings": {
+		"intersystems.servers": {
+			"angular-template": {
+				"webServer": {
+					"scheme": "http",
+					"host": "localhost",
+					"port": 8080
+				},
+				"username": "_SYSTEM"
+			}
+		}
+	}
+}

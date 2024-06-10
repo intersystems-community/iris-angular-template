@@ -4,13 +4,12 @@
 
     // create angular-template namespace
     do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AngularTemplate/Installer.cls","ck")
-    d ##class(AngularTemplate.Installer).SetupBASE() 
-    
+    d ##class(AngularTemplate.Installer).SetupBASE()
 
-    // load all the code of the project as a ZPM package
+    // load all the code of the project as an IPM package
     zn "angular-template"
     set ^Sources = "/irisdev/app/"
 
     do $SYSTEM.OBJ.Load("/irisdev/app/preload/cls/AngularTemplate/Installer.cls","ck")
-    d ##class(AngularTemplate.Installer).SetupBASE() 
+    d ##class(AngularTemplate.Installer).SetupBASE()
     halt
